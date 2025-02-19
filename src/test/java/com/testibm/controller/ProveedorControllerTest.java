@@ -36,7 +36,7 @@ class ProveedorControllerTest {
     }
 
     @Test
-    void testObtenerProveedores_whenClienteExiste() throws Exception {
+    void testObtenerProveedores_whenClienteExiste_thenReturnData() throws Exception {
         // GIVEN
         ProveedorVO[] proveedores = {
             new ProveedorVO(1L, "Coca-cola", LocalDate.of(2024, 1, 1), 5L),
@@ -55,5 +55,21 @@ class ProveedorControllerTest {
                 .andExpect(jsonPath("$[1].nombre").value("Pepsi"));
 
         verify(proveedorService, times(1)).obtenerProveedoresPorCliente(5L);
+    }
+    
+    @Test
+    void testObtenerProveedores_whenClienteNoExiste_thenReturnEmptyArray() throws Exception {
+        // GIVEN: Simulamos que el servicio devuelve un array vacío cuando el cliente no existe
+        when(proveedorService.obtenerProveedoresPorCliente(99L)).thenReturn(new ProveedorVO[0]);
+
+        // WHEN
+        mockMvc.perform(get("/proveedores/99")
+                .contentType(MediaType.APPLICATION_JSON))
+                
+        // THEN
+                .andExpect(status().isOk())
+                .andExpect(content().json("[]"));
+
+        verify(proveedorService, times(1)).obtenerProveedoresPorCliente(99L);
     }
 }
