@@ -1,0 +1,14 @@
+target/
+*.log
+*.class
+*.jar
+*.war
+*.iml
+*.swp
+/.idea/
+/.vscode/
+/.mvn/
+/out/
+node_modules/
+.env
+application.properties
