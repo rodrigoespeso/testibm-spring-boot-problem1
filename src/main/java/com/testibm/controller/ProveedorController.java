@@ -23,7 +23,6 @@ public class ProveedorController {
     @Operation(summary = "Obtener proveedores por ID de cliente", description = "Devuelve un array de proveedores asociados a un cliente")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Lista de proveedores encontrada"),
-        @ApiResponse(responseCode = "404", description = "No se encontraron proveedores para el cliente dado")
     })
     @GetMapping("/{idCliente}")
     public ResponseEntity<ProveedorVO[]> obtenerProveedores(@PathVariable Long idCliente) {

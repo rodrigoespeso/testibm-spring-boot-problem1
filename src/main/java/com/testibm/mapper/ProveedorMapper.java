@@ -22,6 +22,6 @@ public class ProveedorMapper {
     
     public static ProveedorVO[] toVOArray(List<ProveedorEntity> entities) {
         List<ProveedorVO> voList = toVOList(entities);
-        return voList.toArray(new ProveedorVO[0]);
+        return voList.toArray(new ProveedorVO[0]); // con parametro evitamos cast
     }
 }
